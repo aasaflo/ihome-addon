@@ -1,0 +1,44 @@
+name: iHome Bridge
+version: "1.0.0"
+slug: ihome_bridge
+description: Secure gateway between the iHome app and Home Assistant. Set up with a code from iHome Studio.
+url: https://github.com/aasaflo/ihome-addon
+image: "ghcr.io/aasaflo/ihome-bridge-{arch}"
+arch:
+  - aarch64
+  - amd64
+init: false
+startup: application
+boot: auto
+homeassistant_api: true
+hassio_api: true
+hassio_role: manager
+ports:
+  8099/tcp: 8099
+  8100/tcp: null
+ports_description:
+  8099/tcp: iHome app and API
+  8100/tcp: Support tunnel to Home Assistant (closed unless opened by iHome Studio)
+webui: "http://[HOST]:[PORT:8099]/"
+watchdog: "http://[HOST]:[PORT:8099]/api/health"
+options:
+  setup_code: ""
+  installer_password: ""
+  allowed_origins: ""
+  session_days: 90
+schema:
+  setup_code: "password?"
+  installer_password: "password?"
+  allowed_origins: "str?"
+  session_days: "int(1,365)?"
+  trusted_proxies: "str?"
+  allow_app_origin: "bool?"
+  remote_installer_needs_approval: "bool?"
+  offsite_backup_copies: "bool?"
+  support_tunnel_url: "url?"
+  reset_studio_lock: "bool?"
+  installer_session_hours: "int(1,72)?"
+  assist_sync: "bool?"
+  cf_api_token: "password?"
+  cf_hostname: "str?"
+  support_tunnel_host: "str?"
